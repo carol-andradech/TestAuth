@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using Firebase;
 using Firebase.Auth;
 using TMPro;
@@ -27,6 +28,9 @@ public class AuthManager : MonoBehaviour
     public TMP_InputField passwordRegisterField;
     public TMP_InputField passwordRegisterVerifyField;
     public TMP_Text warningRegisterText;
+
+ 
+  
 
     void Awake()
     {
@@ -65,6 +69,35 @@ public class AuthManager : MonoBehaviour
         //Call the register coroutine passing the email, password, and username
         StartCoroutine(Register(emailRegisterField.text, passwordRegisterField.text, usernameRegisterField.text));
     }
+
+     public void ClearFields()
+    {
+        StartCoroutine(ClearCoroutine());
+    }
+
+    private IEnumerator ClearCoroutine()
+    {
+        // Aguarde um frame para garantir que o código anterior tenha sido executado completamente
+        yield return null;
+
+        // Limpe todos os campos de entrada
+        emailLoginField.text = "";
+        passwordLoginField.text = "";
+        warningLoginText.text = "";
+        confirmLoginText.text = "";
+
+        usernameRegisterField.text = "";
+        emailRegisterField.text = "";
+        passwordRegisterField.text = "";
+        passwordRegisterVerifyField.text = "";
+        warningRegisterText.text = "";
+
+        // Limpeza adicional, se necessário
+        // emailLoginField2.text = "";
+        // passwordLoginField2.text = "";
+    }
+
+
 
     private IEnumerator Login(string _email, string _password)
     {
@@ -191,4 +224,6 @@ public class AuthManager : MonoBehaviour
             }
         }
     }
+
+   
 }
